@@ -3,6 +3,7 @@ package br.edu.ifsul.cstsi.trabalho_ellen_tads.api.filmes;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -23,6 +24,7 @@ public class FilmeController {
         return ResponseEntity.ok(service.getFilme(id));
     }
     @PostMapping
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<URI> insert(@RequestBody Filme filme) {
         var f = service.insertFilme(filme);
         var location = getUri(f.getId());
