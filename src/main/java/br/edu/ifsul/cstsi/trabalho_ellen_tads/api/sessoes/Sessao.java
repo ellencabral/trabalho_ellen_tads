@@ -4,6 +4,9 @@ import br.edu.ifsul.cstsi.trabalho_ellen_tads.api.filmes.Filme;
 import br.edu.ifsul.cstsi.trabalho_ellen_tads.api.ingressos.Ingresso;
 import br.edu.ifsul.cstsi.trabalho_ellen_tads.api.salas.Sala;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.sql.Time;
@@ -12,6 +15,9 @@ import java.util.Date;
 
 @Entity
 @Table(name = "sessoes")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Sessao {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,9 +29,9 @@ public class Sessao {
     @ManyToOne
     @JoinColumn(name = "filme_id", referencedColumnName = "id")
     private Filme filme;
-    @ManyToOne
-    @JoinColumn(name = "ingresso_id", referencedColumnName = "id")
-    private Ingresso ingresso;
     @OneToMany(mappedBy = "sessao")
-    private Collection<Sala> salas;
+    private Collection<Ingresso> ingressos;
+    @ManyToOne
+    @JoinColumn(name = "sala_id", referencedColumnName = "id")
+    private Sala sala;
 }
