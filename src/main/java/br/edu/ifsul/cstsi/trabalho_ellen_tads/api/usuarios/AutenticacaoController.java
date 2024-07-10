@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AutenticacaoController {
     @Autowired
     private AuthenticationManager manager;
+
     @PostMapping
     public ResponseEntity efetuaLogin(@RequestBody UsuarioDTO userDTO) {
         var authenticationDTO = new UsernamePasswordAuthenticationToken(userDTO.usuario(), userDTO.senha());
